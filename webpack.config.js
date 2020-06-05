@@ -21,7 +21,7 @@ module.exports ={
                     path.resolve(__dirname,'app')
                 ],
                 excluede:[
-                    path.resolve(__dirname,'app/demo-files')
+                    // path.resolve(__dirname,'app/demo-files')
                 ]
 
             }
