@@ -1,5 +1,4 @@
 import i18nIsoCountries from 'i18n-iso-countries'
-// const i18nIsoCountries = require("i18n-iso-countries");
 
 const getCountryList = (lang) => {
   const i18country = { ...i18nIsoCountries.getNames(lang) };
@@ -43,6 +42,6 @@ const getCountryList = (lang) => {
   };
 };
 
-// module.exports= getCountryList
 window.getCountryList =getCountryList
+
 // export default getCountryList
