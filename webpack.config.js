@@ -12,7 +12,20 @@ module.exports ={
         libraryTarget:"umd2",
         sourceMapFilename:"[file].map",
         chunkFilename:"[id.js]"
-
     },
+    module:{
+        rules:[
+            {
+                test:'/\.jsx?$/',
+                include:[
+                    path.resolve(__dirname,'app')
+                ],
+                excluede:[
+                    path.resolve(__dirname,'app/demo-files')
+                ]
+
+            }
+        ]
+    }
 
 }
