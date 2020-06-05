@@ -4,6 +4,8 @@
   "description": "practice for webpack",
   "main": "index.js",
   "scripts": {
+    "wp:dev": "rm -rf dist && webpack-dev-server",
+    "wp:build": "rm -rf dist && webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +20,16 @@
   },
   "homepage": "https://github.com/conqueror23/webpack-practic#readme",
   "devDependencies": {
+    "babel-loader": "^8.1.0",
+    "babel-preset": "^1.1.6",
+    "css-loader": "^3.5.3",
+    "ts-loader": "^7.0.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "i18n-iso-countries": "^6.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }

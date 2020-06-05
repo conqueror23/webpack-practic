@@ -1,0 +1,1 @@
+export default 'this is inside module c here'

@@ -4,7 +4,7 @@ const getData =(time)=>{
     const result = ((time)=>{
         console.log('get your time',time);
     })();
-    result(2);
+    return result(2);
 }
 
-export const getData
+export default getData
