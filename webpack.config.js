@@ -2,12 +2,17 @@ const path =require('path');
 
 module.exports ={
     // settings for static generating renamed css and js with random numbers
-    entry:'./src/country/getCountryList.js',
+    entry:['./src/package-a/packagea.js','./src/package-b/package-b'],
     mode:"production",
-    target:"node",
+    // target:"node",
+    // devTools:"source-map",
     output:{
-        filename:"getCountryList-[contentHash:5].js",
+        // filename:"getCountryList-[contentHash:5].js",
         path:__dirname+"/dist/",
+        libraryTarget:"umd2",
+        sourceMapFilename:"[file].map",
+        chunkFilename:"[id.js]"
+
     },
 
 }
