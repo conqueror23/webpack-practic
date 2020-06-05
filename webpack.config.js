@@ -23,8 +23,17 @@ module.exports ={
                 excluede:[
                     // path.resolve(__dirname,'app/demo-files')
                 ]
-
+            },
+            {
+                test:'/\.tsx?$/',
+                include:[
+                    path.resolve(__dirname,'app')
+                ],
+                excluede:[
+                    // path.resolve(__dirname,'app/demo-files')
+                ]
             }
+            
         ]
     }
 
