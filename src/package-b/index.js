@@ -1,0 +1,1 @@
+console.log('and this is package in package- ---b');

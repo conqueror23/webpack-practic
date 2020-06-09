@@ -4,8 +4,11 @@
   "description": "practice for webpack",
   "main": "index.js",
   "scripts": {
-    "wp:dev": "rm -rf dist && webpack-dev-server",
-    "wp:build": "rm -rf dist && webpack",
+    "clrD":"rm -rf dist",
+    "wp-dev": "rm -rf dist && webpack-dev-server",
+    "wp-build:package-a": "webpack",
+    "wp-build:package-b": "webpack",
+    "wp-build:country": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
