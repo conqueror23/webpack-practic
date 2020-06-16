@@ -9,5 +9,20 @@ module.exports ={
         filename:"getCountryList-[contentHash:5].js",
         path:__dirname+"/dist/",
     },
+    module:{
+        rules:[
+            {
+                test:"/\.js$/",
+                use:{
+                    loader:'bable-loader',
+                    options:{
+                        presets:['@babel/preset-env']
+                    }
+
+                }
+            }
+        ]
+    }
+    
 
 }

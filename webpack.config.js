@@ -5,12 +5,12 @@ module.exports = () => {
   // settings for static generating renamed css and js with random numbers
   console.log(`operations ${operations} and the packages ${packages}`);
   const config = {
-    entry: [`./src/${packages}/index.js`],
-    mode: "production",
+    // entry: [`./src/${packages}/index.js`],
+    // mode: "production",
     // target:"node",
     // devTools:"source-map",
     // output:{
-    //     // filename:"getCountryList-[contentHash:5].js",
+        // filename:"getCountryList-[contentHash:5].js",
     //     path:__dirname+"/dist/",
     //     libraryTarget:"umd2",
     //     sourceMapFilename:"[file].map",
