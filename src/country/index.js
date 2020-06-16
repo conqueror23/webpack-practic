@@ -1,5 +1,5 @@
 // import {getCountries} from './getCountryList'
-const getCountries =require('./getCountryList')
+import getCountries from './getCountryList' 
 
 // console.log(getCountries);
 
