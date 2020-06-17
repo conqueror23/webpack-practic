@@ -9,6 +9,7 @@
     "wp-build:package-a": "webpack",
     "wp-build:package-b": "webpack",
     "wp-build:country": "webpack --config webpack.config.uni.js",
+    "rollup": "rollup -c rollup.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,7 +25,10 @@
   "homepage": "https://github.com/conqueror23/webpack-practic#readme",
   "devDependencies": {
     "@babel/core": "^7.10.2",
+    "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
+    "@rollup/plugin-babel": "^5.0.3",
+    "@rollup/plugin-node-resolve": "^8.0.1",
     "babel-loader": "^8.1.0",
     "babel-preset": "^1.1.6",
     "css-loader": "^3.5.3",
