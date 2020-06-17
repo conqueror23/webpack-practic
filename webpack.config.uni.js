@@ -4,7 +4,6 @@ module.exports ={
     // settings for static generating renamed css and js with random numbers
     entry:'./src/country/getCountryList.js',
     mode:"production",
-    // target:"web",
     // devtool:'inline-source-map',
     output:{
         filename:"country/getCountryList.js",
@@ -13,18 +12,10 @@ module.exports ={
     module:{
         rules:[
             {
-                test:"/\.m?js$/",
-                // exclude: /(node_modules|bower_components)/,
+                test:"/\.js$/",
+                exclude: /(node_modules|bower_components)/,
                 use:{
-                    loader:'bable-loader',
-                    options:{
-                        presets: ['@babel/preset-env',{
-                            targets: {
-                                browsers: '> 1%, IE 11, not dead',
-                              },
-                        }],
-                        plugins: ['@babel/plugin-transform-runtime']
-                    }
+                    loader:'babel-loader',
                 }
             },
             {
@@ -41,13 +32,11 @@ module.exports ={
                             "target": "es5"
                             // lib: ['es5', 'es6', 'es7']
                         },
-
                     }
-
                 }
-
             }
         ]
+        
       }
     
 
