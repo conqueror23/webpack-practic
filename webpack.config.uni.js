@@ -4,23 +4,48 @@ module.exports ={
     // settings for static generating renamed css and js with random numbers
     entry:'./src/country/getCountryList.js',
     mode:"production",
-    target:"iife",
+    // target:"web",
+    // devtool:'inline-source-map',
     output:{
-        filename:"getCountryList-[contentHash:5].js",
+        filename:"country/getCountryList.js",
         path:__dirname+"/dist/",
     },
     module:{
         rules:[
             {
-                test:"/\.js$/",
-                exclude: /(node_modules|bower_components)/,
+                test:"/\.m?js$/",
+                // exclude: /(node_modules|bower_components)/,
                 use:{
                     loader:'bable-loader',
                     options:{
-                        presets:['@babel/preset-env'],
+                        presets: ['@babel/preset-env',{
+                            targets: {
+                                browsers: '> 1%, IE 11, not dead',
+                              },
+                        }],
                         plugins: ['@babel/plugin-transform-runtime']
                     }
                 }
+            },
+            {
+                test:"/\.m?ts&/",
+                use:{
+                    loader:'ts-loader',
+                    options :{
+                        transpileOnly: true,
+                        compilerOptions: {
+                            "module": "es6",
+                            //todo due to a possibe ts bug
+                            //set es6 for chart
+                            //otherwise use es5 for ie
+                            "target": "es5"
+                            // lib: ['es5', 'es6', 'es7']
+                        },
+
+                    }
+
+                }
+
             }
         ]
     }
