@@ -4,7 +4,7 @@
   "description": "practice for webpack",
   "main": "index.js",
   "scripts": {
-    "clrD": "rm -rf dist",
+    "clear": "rm -rf dist",
     "wp-dev": "rm -rf dist && webpack-dev-server",
     "wp-build:package-a": "webpack",
     "wp-build:package-b": "webpack",

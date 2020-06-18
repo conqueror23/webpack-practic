@@ -3,17 +3,18 @@ const path =require('path');
 module.exports ={
     // settings for static generating renamed css and js with random numbers
     entry:'./src/country/getCountryList.js',
-    mode:"production",
-    // devtool:'inline-source-map',
+    mode:"development",
+    devtool:'inline-source-map',
     output:{
         filename:"country/getCountryList.js",
+        // filename:"country/testDist.js",
         path:__dirname+"/dist/",
     },
     module:{
         rules:[
             {
                 test:"/\.js$/",
-                exclude: /(node_modules|bower_components)/,
+                // exclude: /(node_modules|bower_components)/,
                 use:{
                     loader:'babel-loader',
                 }

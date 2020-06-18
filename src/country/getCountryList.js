@@ -1,4 +1,4 @@
-import * as i18nIsoCountries from 'i18n-iso-countries'
+import i18nIsoCountries from 'i18n-iso-countries'
 
 const getCountryList = (lang) => {
   const i18country = { ...i18nIsoCountries.getNames(lang) };
