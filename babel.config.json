@@ -1,11 +1,10 @@
 {
-    "presets": [
-      [
-        "@babel/preset-env"
-      ]
-    ],
+  "presets": [
+    ["@babel/preset-env", {
     "targets": {
-        "chrome": "58",
-        "ie": "10"
-      }
-  }
+        "chrome": 60,
+        "ie":11
+    }
+},"stage-4"]
+]
+}

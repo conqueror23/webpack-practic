@@ -75,8 +75,14 @@ var getCountryList = function getCountryList(lang) {
   frequentCountryCodeList.forEach(function (key) {
     delete i18country[key];
   });
+
+  var i18countryVals = Object.keys(i18country).map(function(key) {
+    return i18country[key];
+  });
+
   var CountryCodeList = frequentCountryCodeList.concat(Object.keys(i18country));
-  var countryList = frequentCountryList.concat(Object.values(i18country));
+  var countryList = frequentCountryList.concat(i18countryVals);
+
   var countryListValues = [];
 
   var countryValueObject = _i18nIsoCountries["default"].getNames("en");

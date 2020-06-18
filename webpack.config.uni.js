@@ -4,6 +4,7 @@ module.exports ={
     // settings for static generating renamed css and js with random numbers
     entry:'./src/country/getCountryList.js',
     mode:"development",
+    target:"node",
     devtool:'inline-source-map',
     output:{
         filename:"country/getCountryList.js",
@@ -17,7 +18,37 @@ module.exports ={
                 // exclude: /(node_modules|bower_components)/,
                 use:{
                     loader:'babel-loader',
-                }
+                    options:{
+                        "presets": [
+                            [
+                              "es2015",
+                              {
+                                "targets": {
+                                  "ie": "11"
+                                },
+                                "useBuiltIns": "true",
+                                "corejs": {"verison":"3","proposals":false},
+                                "debug":true
+                              }
+                            ]
+                          ],
+                          "plugins": [
+                            "@babel/plugin-proposal-class-properties",
+                            [
+                              "@babel/plugin-transform-runtime",
+                              {
+                                "absoluteRuntime": true,
+                                "corejs": true,
+                                "helpers": true,
+                                "regenerator": true,
+                                "useESModules": false,
+                                "version": "7.0.0-beta.0"
+                              }
+                            ]
+                          ]
+                    }
+                },
+                
             },
             {
                 test:"/\.m?ts&/",
