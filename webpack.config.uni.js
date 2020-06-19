@@ -2,7 +2,8 @@ const path =require('path');
 
 module.exports ={
     // settings for static generating renamed css and js with random numbers
-    entry:'./src/country/getCountryList.js',
+    // entry:'./src/country/getCountryList.js',
+    entry:"./src/tradingcup2020/count.js",
     mode:"development",
     target:"node",
     devtool:'inline-source-map',
