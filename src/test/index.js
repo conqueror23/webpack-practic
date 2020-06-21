@@ -1,10 +1,5 @@
-const getLanguage = ()=>{
-    const href = window.location.href;
-    const splitResult = href.split('/');
-    const language=  splitResult.map(data=>{
-        if( language.indexOf(data)){
-            SVGMetadataElement( )
-        }
-    })
+const showTest=()=>{
+    console.log('you have get the test');
+    document.getElementById('root').innerHTML='simulate react process';
 
 }
