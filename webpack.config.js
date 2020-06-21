@@ -1,4 +1,5 @@
 const path = require("path");
+const HTMLPlugins = require('html-webpack-plugin');
 
 
 const devSeverOptions={
@@ -9,10 +10,12 @@ const devSeverOptions={
     port:8000,
   }
 }
+
 const moduleOptions={
   rules: [
     {
-      test: "/.jsx?$/",
+      test: ["/.jsx?$/",'/.js?$/'],
+      use:"babel-loader",
       include: [path.resolve(__dirname, "app")],
     },
     {
@@ -27,11 +30,10 @@ const moduleOptions={
     }
   ],
 }
-// const outputOptions={
-//   filename: `${packages}-[contentHash:5].js`,
-//   path: path.resolve(__dirname, `dist/${packages}`),
-// }
 
+const devPlugins =[
+  new HTMLPlugins(),
+];
 const commonSetting=(packages)=>{return {
   entry: path.resolve(packages,'index.js'),
   shared: ['react', 'react-dom'],
@@ -43,6 +45,8 @@ const commonSetting=(packages)=>{return {
   stats:{ colors: true},
 }
 }
+
+
 module.exports = () => {
   const [operations,packages] = process.env.npm_lifecycle_event.split(":");
   // console.log('path here',path.resolve(__dirname,'./src',packages,'index.js'));
@@ -52,10 +56,9 @@ module.exports = () => {
   if(operations.indexOf('dev')>-1){
     return config={
       ...commonSetting,
-      // resolve: {
-      //   modules: ['node_modules','src']
-      // },
-      ...devSeverOptions
+      ...devSeverOptions,
+      plugins:[...devPlugins],
+
     }
   }else{
     return config={...commonSetting}
