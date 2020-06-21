@@ -1,5 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import HeroSection from './tradingcup/Hero'
+const showTest=()=>{
+    console.log('you have get the test');
+    document.getElementById('root').innerHTML='simulate react process';
+}
+// document.getElementById('root')
 
-ReactDOM.render(<HeroSection />,document.getElementById('root'));

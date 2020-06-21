@@ -19,8 +19,8 @@ const moduleOptions={
       include: [path.resolve(__dirname, "app")],
     },
     {
-      test: "/.tsx?$/",
-      use: "ts-loader",
+      test: '/\.ts$/',
+      use: {loader:"ts-loader"},
       include: [path.resolve(__dirname, "app")],
       exclude: /node_modules/,
     },
@@ -37,11 +37,11 @@ const devPlugins =[
 const commonSetting=(packages)=>{return {
   entry: path.resolve(packages,'index.js'),
   shared: ['react', 'react-dom'],
-  module: {...moduleOptions},
-  output:{
-    libraryTarget:"umd", 
-    filename:"bundle.js",
-  },
+  // module: {...moduleOptions},
+  // output:{
+  //   libraryTarget:"umd", 
+  //   filename:"bundle.js",
+  // },
   stats:{ colors: true},
 }
 }
@@ -57,8 +57,27 @@ module.exports = () => {
     return config={
       ...commonSetting,
       ...devSeverOptions,
+      module:{
+        rules:[
+          {
+            test:'/\.js?$/',
+            use:"babel-loader",
+            include: [path.resolve(__dirname, "app")],
+          },
+          {
+            test: '/\.ts$/',
+            use: {loader:"ts-loader"},
+            include: [path.resolve(__dirname, "app")],
+            exclude: /node_modules/,
+          },
+          {
+            test:[/\.scss?$/,/\.sass?$/],
+            use:["style-loader","css-loader","sass-loader"],
+          }
+       
+        ]
+      },
       plugins:[...devPlugins],
-
     }
   }else{
     return config={...commonSetting}
