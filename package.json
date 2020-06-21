@@ -9,7 +9,7 @@
     "wp-build:package-a": "webpack",
     "wp-build:package-b": "webpack",
     "wp-dev:tradingcup": "webpack-dev-server",
-    "wp-dev:test": "webpack-dev-server",
+    "wp-dev:test": "webpack-dev-server --config webpack.config.js",
     "babel:build": "babel src/country/getCountryList.js -d ./result",
     "babel:build-count": "babel src/tradingcup2020/count.js -d ./result.js",
     "wp-build:country": "[ -f dist/country/getCountryList.js ] && rm dist/country/getCountryList.js; webpack --config webpack.config.uni.js",
