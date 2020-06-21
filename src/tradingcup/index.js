@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import HeroSection from './Hero'
+import Hero from './Hero';
 
-ReactDOM.render(<HeroSection />,document.getElementById('root'));
+
+ReactDOM.render(<Hero/>,document.getElementById('root'));
