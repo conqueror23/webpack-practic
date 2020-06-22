@@ -1,116 +1,136 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const HtmlWebpackDeployPlugin = require('html-webpack-deploy-plugin');
-const devSeverOptions = (packages) => {
+const HtmlWebpackDeployPlugin = require("html-webpack-deploy-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const depenPackages = (isProd = "false") => {
   return {
-    contentBase: path.join(__dirname, "./src", packages),
-    hot: true,
-    compress: true,
-    lazy: true,
-    filename: "dist.js",
-    port: 8000,
+    "react": {
+      copy: [
+        isProd
+          ? {
+              from: "umd/react.production.min.js",
+              to: "react.production.min.js",
+            }
+          : { from: "umd/react.development.js", to: "react.development.js" },
+      ],
+      scripts: {
+        variableName: "React",
+        path: "react.production.min.js",
+        devPath: "react.development.js",
+      },
+    },
+    "react-dom": {
+      copy: [
+        isProd
+          ? {
+              from: "umd/react-dom.production.min.js",
+              to: "react-dom.production.min.js",
+            }
+          : {
+              from: "umd/react-dom.development.js",
+              to: "react-dom.development.js",
+            },
+      ],
+      scripts: {
+        variableName: "ReactDOM",
+        path: "react-dom.production.min.js",
+        devPath: "react-dom.development.js",
+      },
+    },
   };
 };
 
-const depenPackages=(isProd='false')=>{
+const moduleOptions = (path, packages) => {
   return {
-    'react': {
-        copy: [
-            isProd ? { from: 'umd/react.production.min.js', to: 'react.production.min.js' } :
-                { from: 'umd/react.development.js', to: 'react.development.js' }
-        ],
-        scripts: {
-            variableName: 'React',
-            path: 'react.production.min.js',
-            devPath: 'react.development.js'
-        }
-    },
-    'react-dom': {
-        copy: [
-            isProd ? { from: 'umd/react-dom.production.min.js', to: 'react-dom.production.min.js' } :
-                { from: 'umd/react-dom.development.js', to: 'react-dom.development.js' },
-        ],
-        scripts: {
-            variableName: 'ReactDOM',
-            path: 'react-dom.production.min.js',
-            devPath: 'react-dom.development.js'
-        }
-    },
-    // 'i18next': {
-    //     copy: [
-    //         isProd ?
-    //             { from: 'dist/umd/i18next.min.js', to: 'i18next.min.js' } :
-    //             { from: 'dist/umd/i18next.js', to: 'i18next.js' }
-    //     ],
-    //     scripts: {
-    //         variableName: 'i18next',
-    //         path: 'i18next.min.js',
-    //         devPath: 'i18next.js'
-    //     }
-    // },
-
-}
-}
-
-const moduleOptions = {
-  rules: [
-    {
-      test: /.(js|jsx)$/,
-      exclude: /node_modules/,
-      use: {
-        loader: "babel-loader",
-        options: {
-          presets: ["@babel/preset-env"],
+    rules: [
+      {
+        test: /.(js|jsx)$/,
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, "./src", packages),
+        use: {
+          loader: "babel-loader",
+          options: {
+            // presets: ["@babel/preset-env"],
+            presets: require.resolve("babel-preset-react-app"),
+          },
         },
       },
-    },
-    {
-      test: /.tsx?$/,
-      use: "ts-loader",
-      exclude: /node_modules/,
-    },
-    {
-      test: [/\.scss?$/, /\.sass?$/],
-      use: ["style-loader", "css-loader", "sass-loader"],
-    },
-  ],
+      {
+        test: /.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+      {
+        test: [/\.scss?$/, /\.sass?$/],
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+    ],
+  };
 };
 
-const devPlugins = [
-  new HtmlWebpackPlugin({
-    template: path.resolve(__dirname, "index.html"),
-  }),
-  new HtmlWebpackDeployPlugin({
-    packages: depenPackages(),
-  }),
-];
+const devPlugins = (packages) => {
+  return [
+    new HtmlWebpackPlugin({
+      title: "output management",
+      template: path.resolve(__dirname, "src", packages, "index.html"),
+    }),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackDeployPlugin({
+      packages: depenPackages(),
+    }),
+  ];
+};
 
 module.exports = () => {
   const [operations, packages] = process.env.npm_lifecycle_event.split(":");
-  // console.log('path here',path.resolve(__dirname,'./src',packages,'index.js'));
   // settings for static generating renamed css and js with random numbers
-  // console.log(`operations ${operations} and the packages ${packages}`);
   if (operations.indexOf("dev") > -1) {
     return (config = {
       entry: path.resolve(__dirname, "./src", packages, "index.js"),
       output: {
         path: path.resolve(__dirname, "output"),
-        filename: "bundle.js",
+        filename: "index.js",
       },
-      devtool:"inline-source-map",
+      devtool: "inline-source-map",
+      mode: "development",
       devServer: {
         contentBase: path.join(__dirname, "./src", packages),
         hot: true,
         compress: true,
         lazy: true,
-        filename: "dist.js",
         port: 8000,
+        // from react_afn
       },
-      module: { ...moduleOptions },
+      module: {
+        rules: [
+          {
+            test: /.(js|jsx)$/,
+            exclude: /node_modules/,
+            include: path.resolve(__dirname, "./src", packages),
+            use: {
+              loader: "babel-loader",
+              options: {
+                // presets: ["@babel/preset-env"],
+                presets: require.resolve("babel-preset-react-app"),
+              },
+            },
+          },
+          {
+            test: /.tsx?$/,
+            use: "ts-loader",
+            exclude: /node_modules/,
+          },
+          {
+            test: [/\.scss?$/, /\.sass?$/],
+            use: ["style-loader", "css-loader", "sass-loader"],
+          },
+        ],
+      },
       resolve: {
-        extensions: [".tsx", ".js"],
+        modules: ["src", "node_modules"],
+        extensions: [".js", ".ts", ".jsx", ".scss"],
       },
-      plugins: [...devPlugins],
+      plugins: [...devPlugins(packages)],
     });
   } else {
     // return (config = {});
