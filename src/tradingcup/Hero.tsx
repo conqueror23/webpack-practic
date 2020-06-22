@@ -1,7 +1,6 @@
 import React from 'react'
 import Counter from './Counter'
 
-
 const Hero = () => {
     return (
         <div className="tradingcup-warpper">
