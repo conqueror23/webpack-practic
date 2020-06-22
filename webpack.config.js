@@ -104,15 +104,19 @@ module.exports = () => {
       module: {
         rules: [
           {
-            test: /.(js|jsx)$/,
-            exclude: /node_modules/,
-            include: path.resolve(__dirname, "./src", packages),
-            use: {
-              loader: "babel-loader",
-              options: {
-                // presets: ["@babel/preset-env"],
-                presets: require.resolve("babel-preset-react-app"),
-              },
+            test: /\.(js|jsx)$/,
+            loader: "babel-loader",
+            options: {
+              cacheDirectory: true,
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {
+                    targets: "> 0.99%, not dead",
+                  },
+                ],
+                "@babel/preset-react",
+              ],
             },
           },
           {
