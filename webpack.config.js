@@ -68,10 +68,10 @@ const moduleOptions = (path, packages) => {
   };
 };
 
+
 const devPlugins = (packages) => {
   return [
     new HtmlWebpackPlugin({
-      title: "output management",
       template: path.resolve(__dirname, "src", packages, "index.html"),
     }),
     new CleanWebpackPlugin(),
@@ -87,18 +87,14 @@ module.exports = () => {
   if (operations.indexOf("dev") > -1) {
     return (config = {
       entry: path.resolve(__dirname, "./src", packages, "index.js"),
-      output: {
-        path: path.resolve(__dirname, "output"),
-        filename: "index.js",
-      },
       devtool: "inline-source-map",
       mode: "development",
       devServer: {
         contentBase: path.join(__dirname, "./src", packages),
-        hot: true,
-        compress: true,
-        lazy: true,
-        port: 8000,
+        // hot: true,
+        // compress: true,
+        // lazy: true,
+        // port: 8000,
         // from react_afn
       },
       module: {
