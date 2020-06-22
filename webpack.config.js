@@ -87,10 +87,10 @@ module.exports = () => {
   if (operations.indexOf("dev") > -1) {
     return (config = {
       entry: path.resolve(__dirname, "./src", packages, "index.js"),
-      devtool: "inline-source-map",
+      // devtool: "inline-source-map",
       mode: "development",
       devServer: {
-        contentBase: path.join(__dirname, "./src", packages),
+        // contentBase: path.join(__dirname, "./src", packages),
         // hot: true,
         // compress: true,
         // lazy: true,
@@ -127,10 +127,9 @@ module.exports = () => {
         ],
       },
       resolve: {
-        modules: ["src", "node_modules"],
         extensions: [".js", ".ts", ".jsx", ".scss"],
       },
-      plugins: [...devPlugins(packages)],
+      // plugins: [...devPlugins(packages)],
     });
   } else {
     // return (config = {});
