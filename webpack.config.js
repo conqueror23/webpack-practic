@@ -12,8 +12,17 @@ const devSeverOptions = {
 
 const moduleOptions = {
   rules: [
-    {test: /\.js$/ , loader:'babel-loader', exclude: '/node_modules/'},
-    {test: /\.jsx$/ , loader:'babel-loader', exclude: '/node_modules/'},
+    {
+      test: /\.js$/ , 
+      loader:'babel-loader',
+      exclude: '/node_modules/'
+    },
+    {
+      test: /\.jsx$/ ,
+      loader:'babel-loader',
+      presets:['react','es2015'],
+      exclude: '/node_modules/'
+    },
     {
       test: /.ts$/,
       use: { loader: "ts-loader" },
@@ -70,6 +79,9 @@ module.exports = () => {
           }
         ],
       },
+      resolve: {
+        extensions: ['.ts', '.js', '.json']
+      }
       // plugins: [...devPlugins],
     });
   } else {
